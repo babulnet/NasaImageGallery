@@ -55,7 +55,7 @@ struct ImageCellView: View {
                 Spacer()
             }
             
-            CacheAsyncImage(url: URL(string:url)!) { phase in
+            AsyncImageCache(url: URL(string:url)!) { phase in
                 if phase.image == nil {
                     ProgressView()
                 } else {
@@ -85,7 +85,7 @@ struct DetailedView: View {
                 
                 Spacer()
                     .frame(height:30)
-                CacheAsyncImage(url: URL(string:url)!) { phase in
+                AsyncImageCache(url: URL(string:url)!) { phase in
                     if phase.image == nil {
                         ProgressView()
                     } else {

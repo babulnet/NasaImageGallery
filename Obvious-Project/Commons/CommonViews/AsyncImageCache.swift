@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct CacheAsyncImage<Content>: View where Content: View{
+struct AsyncImageCache <Content>: View where Content: View {
     
     private let url: URL
     private let scale: CGFloat
@@ -29,10 +29,8 @@ struct CacheAsyncImage<Content>: View where Content: View{
     
     var body: some View{
         if let cached = ImageCache[url]{
-            let _ = print("cached: \(url.absoluteString)")
             content(.success(cached))
         }else{
-            let _ = print("request: \(url.absoluteString)")
             AsyncImage(
                 url: url,
                 scale: scale,
@@ -43,21 +41,21 @@ struct CacheAsyncImage<Content>: View where Content: View{
         }
     }
     
-    func cacheAndRender(phase: AsyncImagePhase) -> some View{
+    func cacheAndRender(phase: AsyncImagePhase) -> some View {
         if case .success (let image) = phase {
             ImageCache[url] = image
         }
+        
         return content(phase)
     }
 }
 
-fileprivate class ImageCache{
+fileprivate class ImageCache {
     static private var cache: [URL: Image] = [:]
-    static subscript(url: URL) -> Image?{
-        get{
+    static subscript(url: URL) -> Image? {
+        get {
             ImageCache.cache[url]
-        }
-        set{
+        } set {
             ImageCache.cache[url] = newValue
         }
     }
