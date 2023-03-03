@@ -1,4 +1,4 @@
-# NasaImageGallery
+# NASA_ImageGallery
 
 Minimum Supported ios version - 16.0
 
